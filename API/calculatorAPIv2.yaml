@@ -1,0 +1,68 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Calculator API
+  description: This API provides different services to obtain the result of different operations.
+host: calculator.spilab.es
+basePath: /
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /calculate:
+    get:
+      description: Executes an opeation with two operands and an operator
+      summary: Executes an opeation with two operands and an operator
+      tags:
+      - Basic
+      operationId: CalculateGet
+      produces:
+      - application/json
+      parameters:
+      - name: operand1
+        in: query
+        required: false
+        type: string
+        description: First operand
+      - name: operator
+        in: query
+        required: false
+        type: string
+        description: Operator to execute
+      - name: operand2
+        in: query
+        required: false
+        type: string
+        description: Second Operand
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: string
+        404:
+          description: Not found response
+          schema: {}
+      security: []
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /calculate
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test Executes an opeation with two operands and an operator
+        x-testDescription: Executes an opeation with two operands and an operator
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false

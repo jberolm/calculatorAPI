@@ -1,0 +1,68 @@
+openapi: "3.0.1"
+info:
+  title: "Calculator API"
+  description: "This API provides different services to obtain the result of different operations."
+  version: "1.0"
+  termsOfService: "https://calculator.spilab.es/terms"
+  contact:
+    name: "Calculator API"
+    url: "https://calculator.spilab.es/terms"
+    email: "jberolm@unex.es"
+
+servers:
+- url: http://calculator.spilab.es
+  description: Production server
+- url: http://beta.calculator.spilab.es
+  description: Beta server
+  
+paths:
+  /calculate:
+    get:
+      tags:
+      - Basic
+      summary: "Executes an opeation with two operands and an operator"
+      description: "Executes an opeation with two operands and an operator"
+      operationId: calculateoperation
+      parameters:
+      - name: operand1
+        in: query
+        description: "First operand"
+        schema:
+          type: string
+
+      - name: operator
+        in: query
+        description: "Operator to execute"
+        schema:
+          type: string
+
+      - name: operand2
+        in: query
+        description: "Second Operand"
+        schema:
+          type: string
+
+
+
+      responses:
+        200:
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                default: "1"
+        
+        404: 
+          $ref: '#/components/responses/404NotFound'
+
+components:
+  responses:
+    404NotFound:
+      description: Not found response
+      content:
+        text/plain:
+          schema:
+            title: Endpoint not found
+            type: string
+            example: Not found
